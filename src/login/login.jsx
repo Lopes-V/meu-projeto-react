@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
+import { Navigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -7,6 +8,7 @@ function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    
     const dados = {
       email: email, 
       senha: senha 
@@ -20,13 +22,13 @@ function Login() {
         },
         body: JSON.stringify(dados),
       });
-
+      
+      const resultado = await resposta.json();
       if (resposta.ok) {
-        const resultado = await resposta.json();
-        alert("Login realizado!");
-        console.log("Resposta do servidor:", resultado);
+        Navigate("/home")
       } else {
         alert("E-mail ou senha incorretos.");
+        console.log("Erro:", resultado);
       }
     } catch (erro) {
       console.error("Erro ao conectar:", erro);
