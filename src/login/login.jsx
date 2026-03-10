@@ -1,43 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
-import { Navigate } from "react-router-dom";
-import home from '../home/home'
 
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
   const URL_API = "http://localhost:8080";
 
   async function handleSubmit(event) {
-    Navigate(home);
     event.preventDefault();
 
-    const dados = {
-      email: email,
-      senha: senha,
-    };
+    const dados = { email, senha };
 
     try {
-      const resposta = await fetch(URL_API+"/auth/login", {
+      const resposta = await fetch(URL_API + "/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados),
       });
-      alert("ok1")
-      const resultado = await resposta.json();
+
       if (resposta.ok) {
-      } else {
-        alert("E-mail ou senha incorretos.");
-        console.log("Erro:", resultado);
+        const resultado = await resposta.json();
+        console.log("Sucesso:", resultado);
+        navigate("/home");
       }
-      alert("ok 2")
     } catch (erro) {
       console.error("Erro ao conectar:", erro);
-      alert(
-        "Não foi possível alcançar o servidor. Verifique se o Spring Boot está rodando."
-      );
     }
   }
 
