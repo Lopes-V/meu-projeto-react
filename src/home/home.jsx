@@ -1,6 +1,16 @@
 import "./style.css";
-import Bolsonaro from "../assets/bolsonaro.jpeg";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Socrates from "../assets/socrates.jpeg";
 function Home() {
+  const navigate = useNavigate();
+
+  function handleLinkClick(event) {
+    event.preventDefault();
+    const href = event.currentTarget.getAttribute("href");
+    navigate(href);
+  }
+
   return (
     <div>
       <header>
@@ -8,20 +18,20 @@ function Home() {
           <h1>HOME</h1>
           <ul>
             <li>
-              <a href="redirect:/pedido">Pedido</a>
+              <a href="/pedido" onClick={handleLinkClick}>Pedido</a>
             </li>
             <li>
-              <a href="redirect:/pessoa">Pessoa</a>
+              <a href="/pessoa" onClick={handleLinkClick}>Pessoa</a>
             </li>
             <li>
-              <a href="redirect:/produto">Produto</a>
+              <a href="/produto" onClick={handleLinkClick}>Produto</a>
             </li>
           </ul>
         </div>
       </header>
       <main>
-        <h2>BOLSONARO</h2>
-        <img src={Bolsonaro} alt="" />
+        <h2>SOCRATES</h2>
+        <img src={Socrates} alt="" />  
       </main>
     </div>
   );

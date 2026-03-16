@@ -1,63 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; // Adicionei useEffect para carregar a lista ao abrir
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 
-function Pedido() {
+function Produto() {
   const [idProduto, setIdProduto] = useState("");
-  const [idPessoa, setIdPessoa] = useState("");
-  const [id, setId] = useState("");
-  const [listPedido, setListPedidos] = useState([]);
+  const [nomeProduto, setNomeProduto] = useState("");
+  const [listProduto, setListProdutos] = useState([]); // Nome correto do estado
   const navigate = useNavigate();
   const URL_API = "http://localhost:8080";
 
-  async function pegarPedidos() {
+  async function pegarProdutos() {
     try {
-      const resposta = await fetch(URL_API + "/pedido");
-      if (resposta.ok) {
-        const dados = await resposta.json();
-        setListPedidos(dados);
-      }
+      const resposta = await fetch(URL_API + "/produto");
+      const dados = await resposta.json();
+      setListProdutos(dados);
     } catch (erro) {
-      console.error("Erro ao pegar os pedidos", erro);
+      alert("Erro ao pegar os produtos: " + erro);
+      console.error("Erro ao pegar os produtos", erro);
     }
   }
 
+  // Carregar os produtos assim que a tela abrir
   useEffect(() => {
-    pegarPedidos();
+    pegarProdutos();
   }, []);
 
-  async function criarPedido(event) {
+  // O endpoint de criação de produto
+  async function criarProduto(event) {
     event.preventDefault();
-    const dados = { idProduto, idPessoa };
+    const dados = { nomeProduto };
 
     try {
-      const resposta = await fetch(URL_API + "/pedido/criar", {
+      const resposta = await fetch(URL_API + "/produto/criar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados),
       });
 
       if (resposta.ok) {
-        pegarPedidos(); // Atualiza a lista após criar
-        navigate("/home");
+        pegarProdutos();
       }
     } catch (erro) {
+      alert("Erro ao conectar: " + erro);
       console.error("Erro ao conectar:", erro);
     }
   }
 
-  // Função para deletar pedido
-  async function deletarPedido(event) {
+  // Função para deletar produto
+  async function deletarProduto(event) {
     event.preventDefault();
     try {
-      const resposta = await fetch(`${URL_API}/pedido/deletar/${id}`, {
+      const resposta = await fetch(`${URL_API}/produto/deletar/${idProduto}`, {
         method: "DELETE",
       });
       if (resposta.ok) {
-        pegarPedidos();
+        pegarProdutos();
         console.log("Deletado com sucesso");
       }
     } catch (erro) {
+      alert("Erro ao conectar: " + erro);
       console.log("Erro ao conectar:", erro);
     }
   }
@@ -68,12 +69,13 @@ function Pedido() {
     const href = event.currentTarget.getAttribute("href");
     navigate(href);
   }
+
   return (
     <div>
       {/* Cabeçalho */}
       <header>
         <div id="container-header">
-          <h1>PEDIDOS</h1>
+          <h1>PRODUTOS</h1>
           <ul>
             <li>
               <a href="/pedido" onClick={handleLinkClick}>
@@ -93,44 +95,36 @@ function Pedido() {
           </ul>
         </div>
       </header>
-
-      {/* Formulário para criar pedido */}
+      {/* Formulário para criar produto */}
       <div className="formulario">
-        <form onSubmit={criarPedido} method="post">
+        <form onSubmit={criarProduto} method="post">
           <input
-            type="number"
-            placeholder="ID Produto"
-            onChange={(e) => setIdProduto(e.target.value)}
+            placeholder="Nome Produto"
+            type="text"
+            onChange={(e) => setNomeProduto(e.target.value)}
           />
-          <input
-            placeholder="ID Pessoa"
-            type="number"
-            onChange={(e) => setIdPessoa(e.target.value)}
-          />
-          <button type="submit">Criar Pedido</button>
+          <button type="submit">Criar Produto</button>
         </form>
       </div>
 
-      {/* Formulário para deletar pedido */}
+      {/* Formulário para deletar produto */}
       <div className="formulario">
-        <form onSubmit={deletarPedido} method="post">
-          <input type="number" onChange={(e) => setId(e.target.value)} />
-          <button type="submit">Deletar Pedido</button>
+        <form action="" method="post">
+          <input type="number" onChange={(e) => setIdProduto(e.target.value)} />
+          <button type="submit">Deletar Produto</button>
         </form>
       </div>
 
-      {/* Formulário para listar pedidos */}
-      <h2>Lista de Pedidos</h2>
-      <div id="listPedidos">
+      {/* Lista de produtos */}
+      <h2>Lista de Produtos</h2>
+      <div id="listProdutos">
         <ul>
-          {listPedido.map((p, index) => (
+          {listProduto.map((p, index) => (
             <li key={index}>
-              <p>ID pedido</p>
-              Pedido: {p.id}
               <p>ID produto</p>
-              Produto: {p.idProduto}
-              <p>ID pessoa</p>
-              Pessoa : {p.idPessoa}
+              Produto: {p.id}
+              <p>Nome</p>
+              Nome: {p.nome}
               <br />
             </li>
           ))}
@@ -140,4 +134,4 @@ function Pedido() {
   );
 }
 
-export default Pedido;
+export default Produto;

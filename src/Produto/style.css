@@ -67,23 +67,23 @@ header{
   background: #f39c12;
 }
 
-/* Lista de pedidos */
-#listPedidos {
+/* Lista de itens */
+#listProdutos, #listPessoas {
   max-width: 600px;
   margin: 0 auto;
 }
-#listPedidos ul {
+#listProdutos ul, #listPessoas ul {
   list-style: none;
   padding: 0;
 }
-#listPedidos li {
+#listProdutos li, #listPessoas li {
   background: #fff;
   margin-bottom: 12px;
   padding: 12px;
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(44,62,80,0.08);
 }
-#listPedidos p {
+#listProdutos p, #listPessoas p {
   margin: 0;
   font-weight: bold;
   color: #2c3e50;

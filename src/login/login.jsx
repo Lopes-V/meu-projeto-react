@@ -27,6 +27,7 @@ function Login() {
       }
     } catch (erro) {
       console.error("Erro ao conectar:", erro);
+      alert("Erro ao realizar login. Tente novamente.");
     }
   }
 
