@@ -1,16 +1,45 @@
-# React + Vite
+# 💻 Sistema de Gerenciamento Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é um sistema web moderno desenvolvido em React para cadastro, consulta e gerenciamento de pedidos, pessoas, produtos e usuários.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
+- **Login:** Autenticação de usuário com interface elegante.
+- **Home:** Página inicial com navegação intuitiva para todas as áreas do sistema.
+- **Pedidos:** Cadastro, listagem e remoção de pedidos.
+- **Pessoas:** Cadastro, listagem e remoção de pessoas.
+- **Produtos:** Cadastro, listagem e remoção de produtos.
+- **Usuários:** Cadastro, listagem e remoção de usuários.
+- **Navegação SPA:** Transições suaves entre páginas sem recarregar o site.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologias Utilizadas
+- React
+- Fetch API para requisições HTTP
+- CSS moderno e responsivo
+- Vite para build e desenvolvimento
 
-## React Compiler
+## 📁 Estrutura das Páginas
+- Cada área (Pedido, Pessoa, Produto, Usuário) possui formulários estilizados para cadastro e remoção, além de uma lista visual dos itens cadastrados.
+- Página de login com autenticação e layout centralizado.
+- Página Home com imagem, links destacados e navegação fácil.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Como rodar o projeto
+1. Instale as dependências:
+   ```powershell
+   npm install
+   ```
+2. Inicie o servidor de desenvolvimento:
+   ```powershell
+   npm start
+   ```
+3. Acesse `http://localhost:3000` no navegador.
 
-## Expanding the ESLint configuration
+## ⚡ Observações
+- O backend deve estar rodando em `http://localhost:8080`.
+- O projeto pode ser facilmente customizado para outros tipos de cadastro.
+- O layout é responsivo e adaptado para desktop e mobile.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+Projeto desenvolvido para fins de estudo, prática com React e integração com APIs REST.
+
+![Preview](src/assets/socrates.jpeg)
