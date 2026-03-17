@@ -1,0 +1,169 @@
+/* --- RESET BÁSICO --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    color: #2c3e50;
+    /* Removido o justify-content para evitar que a página corte no topo ao rolar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Container principal para alinhar e limitar o tamanho do app */
+.app-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    color: #fff;
+}
+
+/* --- CABEÇALHO --- */
+.container-header {
+    background: #2c3e50;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container-header h1 {
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+.container-header ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que os links desçam de linha em celulares */
+    justify-content: center;
+    gap: 20px;
+}
+
+.container-header li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.container-header li a:hover {
+    color: #fff;
+    background-color: #f39c12;
+    /* Fundo laranjinha ao passar o mouse */
+}
+
+/* --- FORMULÁRIOS --- */
+.formulario {
+    background: #fff;
+    /* Fundo branco para destacar do cinza do body */
+    padding: 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.08);
+}
+
+/* O segredo para um formulário bonito é o display: flex em coluna com gap */
+.formulario form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulario input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #bdc3c7;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.formulario input:focus {
+    border-color: #3498db;
+    /* Borda azul ao clicar no input */
+}
+
+.formulario button {
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 8px;
+    transition: background 0.3s;
+}
+
+.formulario button:hover {
+    background: #f39c12;
+}
+
+/* --- LISTA DE ITENS GENÉRICA --- */
+/* Esta classe substitui todos os IDs (#listPedidos, #listProdutos, etc) */
+.lista-dados {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.lista-dados h2 {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #34495e;
+}
+
+.lista-dados ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Espaço entre os cartões */
+}
+
+.lista-dados li {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    transition: transform 0.2s;
+}
+
+.lista-dados li:hover {
+    transform: translateY(-2px);
+    /* Efeito sutil de levantar o cartão ao passar o mouse */
+}
+
+.lista-dados p {
+    margin: 4px 0;
+    color: #2c3e50;
+    font-size: 0.95rem;
+}
+
+/* Destaca o título de cada campo da lista */
+.lista-dados p strong {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}

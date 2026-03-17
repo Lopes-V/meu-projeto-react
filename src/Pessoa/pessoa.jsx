@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"; // Adicionei useEffect para carregar a lista ao abrir
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "../style-pages.css";
 
-function Pessoa() {
+export default function Pessoa() {
   const [idPessoa, setIdPessoa] = useState("");
   const [nome, setNome] = useState("");
   const [listPessoa, setListPessoas] = useState([]); // Nome correto do estado
@@ -28,10 +28,10 @@ function Pessoa() {
   // O endpoint de criação de pessoa
   async function criarPessoa(event) {
     event.preventDefault();
-    const dados = { idPessoa, nome };
+    const dados = { nome };
 
     try {
-      const resposta = await fetch(URL_API + "/pessoa/criar", {
+      const resposta = await fetch(`${URL_API + "/pessoa/criar"}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados),
@@ -92,6 +92,11 @@ function Pessoa() {
                 Produto
               </a>
             </li>
+            <li>
+              <a href="/usuario" onClick={handleLinkClick}>
+                Usuario
+              </a>
+            </li>
           </ul>
         </div>
       </header>
@@ -121,10 +126,10 @@ function Pessoa() {
         <ul>
           {listPessoa.map((p, index) => (
             <li key={index}>
-              <p>ID pessoa</p>
-              Pessoa: {p.id}
-              <p>Nome</p>
-              Nome: {p.nome}
+              ID Pessoa: {p.id}
+              <br />
+              Nome Pessoa: {p.nome}
+              <br />
               <br />
             </li>
           ))}
@@ -133,5 +138,3 @@ function Pessoa() {
     </div>
   );
 }
-
-export default Pessoa;

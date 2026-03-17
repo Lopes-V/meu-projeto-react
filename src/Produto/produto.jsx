@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"; // Adicionei useEffect para carregar a lista ao abrir
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "../style-pages.css";
 
 function Produto() {
   const [idProduto, setIdProduto] = useState("");
@@ -30,8 +30,10 @@ function Produto() {
     event.preventDefault();
     const dados = { nomeProduto };
 
+    alert(nomeProduto)
+
     try {
-      const resposta = await fetch(URL_API + "/produto/criar", {
+      const resposta = await fetch(`${URL_API + "/produto/criar"}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados),
@@ -41,7 +43,6 @@ function Produto() {
         pegarProdutos();
       }
     } catch (erro) {
-      alert("Erro ao conectar: " + erro);
       console.error("Erro ao conectar:", erro);
     }
   }
@@ -92,6 +93,11 @@ function Produto() {
                 Produto
               </a>
             </li>
+            <li>
+              <a href="/usuario" onClick={handleLinkClick}>
+                Usuario
+              </a>
+            </li>
           </ul>
         </div>
       </header>
@@ -121,10 +127,10 @@ function Produto() {
         <ul>
           {listProduto.map((p, index) => (
             <li key={index}>
-              <p>ID produto</p>
-              Produto: {p.id}
-              <p>Nome</p>
-              Nome: {p.nome}
+              ID Produto: {p.id}
+              <br />
+              Nome Produto: {p.nome}
+              <br />
               <br />
             </li>
           ))}

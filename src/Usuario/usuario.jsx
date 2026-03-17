@@ -2,59 +2,61 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style-pages.css";
 
-export default function Pedido() {
-  const [idProduto, setIdProduto] = useState("");
-  const [idPessoa, setIdPessoa] = useState("");
-  const [id, setId] = useState("");
-  const [listPedido, setListPedidos] = useState([]);
+export default function Usuario() {
+  const [idUsuario, setIdUsuario] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const [senha, setSenha] = useState("");
+  const [listUsuarios, setListUsuarios] = useState([]);
   const navigate = useNavigate();
+
   const URL_API = "http://localhost:8080";
 
-  async function pegarPedidos() {
+  async function pegarUsuarios() {
     try {
-      const resposta = await fetch(`${URL_API + "/pedido"}`);
+      const resposta = await fetch(`${URL_API + "/usuario"}`);
       if (resposta.ok) {
         const dados = await resposta.json();
-        setListPedidos(dados);
+        setListUsuarios(dados);
       }
     } catch (erro) {
-      console.error("Erro ao pegar os pedidos", erro);
+      console.error("Erro ao pegar os usuarios", erro);
     }
   }
 
   useEffect(() => {
-    pegarPedidos();
+    pegarUsuarios();
   }, []);
 
-  async function criarPedido(event) {
+  async function criarUsuario(event) {
     event.preventDefault();
-    const dados = { idProduto, idPessoa };
+    const dados = { name, email, role, senha };
 
     try {
-      const resposta = await fetch(`${URL_API + "/pedido/criar"}`, {
+      const resposta = await fetch(`${URL_API + "/usuario/criar"}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados),
       });
 
       if (resposta.ok) {
-        pegarPedidos(); // Atualiza a lista após criar
-        navigate("/home");
+        pegarUsuarios(); // Atualiza a lista após criar
       }
     } catch (erro) {
       console.error("Erro ao conectar:", erro);
     }
   }
 
-  // Função para deletar pedido
-  async function deletarPedido(event) {
+  // Função para deletar usuario
+  async function deletarUsuario(event) {
     event.preventDefault();
     try {
-      const resposta = await fetch(`${URL_API}/pedido/deletar/${id}`, {
+      const resposta = await fetch(`${URL_API}/usuario/deletar/${idUsuario}`, {
         method: "DELETE",
       });
       if (resposta.ok) {
-        pegarPedidos();
+        pegarUsuarios();
         console.log("Deletado com sucesso");
       }
     } catch (erro) {
@@ -73,7 +75,7 @@ export default function Pedido() {
       {/* Cabeçalho */}
       <header>
         <div id="container-header">
-          <h1>PEDIDOS</h1>
+          <h1>USUARIO</h1>
           <ul>
             <li>
               <a href="/pedido" onClick={handleLinkClick}>
@@ -101,40 +103,52 @@ export default function Pedido() {
 
       {/* Formulário para criar pedido */}
       <div className="formulario">
-        <form onSubmit={criarPedido} method="post">
+        <form onSubmit={criarUsuario} method="post">
           <input
-            type="number"
-            placeholder="ID Produto"
-            onChange={(e) => setIdProduto(e.target.value)}
+            placeholder="Nome"
+            type="text"
+            onChange={(e) => setName(e.target.value)}
           />
           <input
-            placeholder="ID Pessoa"
-            type="number"
-            onChange={(e) => setIdPessoa(e.target.value)}
+            placeholder="Email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit">Criar Pedido</button>
+          <input
+            placeholder="Role"
+            type="text"
+            onChange={(e) => setRole(e.target.value)}
+          />
+          <input
+            placeholder="Senha"
+            type="password"
+            onChange={(e) => setSenha(e.target.value)}
+          />
+          <button type="submit">Criar Usuario</button>
         </form>
       </div>
 
-      {/* Formulário para deletar pedido */}
+      {/* Formulário para deletar usuario */}
       <div className="formulario">
-        <form onSubmit={deletarPedido} method="post">
-          <input type="number" onChange={(e) => setId(e.target.value)} />
-          <button type="submit">Deletar Pedido</button>
+        <form onSubmit={deletarUsuario} method="post">
+          <input type="number" onChange={(e) => setIdUsuario(e.target.value)} />
+          <button type="submit">Deletar Usuario</button>
         </form>
       </div>
 
-      {/* Formulário para listar pedidos */}
-      <h2>Lista de Pedidos</h2>
-      <div id="listPedidos">
+      {/* Formulário para listar usuarios */}
+      <h2>Lista de Usuarios</h2>
+      <div id="listUsuarios">
         <ul>
-          {listPedido.map((p, index) => (
+          {listUsuarios.map((u, index) => (
             <li key={index}>
-              ID Pedido: {p.id}
+              ID Usuario: {u.idUsuario}
               <br />
-              ID Produto: {p.idProduto}
+              Nome Usuario: {u.name}
               <br />
-              ID Pessoa: {p.idPessoa}
+              Email Usuario: {u.email}
+              <br />
+              Role Usuario: {u.role}
               <br />
               <br />
             </li>

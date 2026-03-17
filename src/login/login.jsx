@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "./login.css";
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
@@ -65,5 +65,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

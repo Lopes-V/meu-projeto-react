@@ -6,6 +6,7 @@ import Home from './home/home'
 import Pedido from './Pedido/pedido'
 import Pessoa from './Pessoa/pessoa'
 import Produto from './Produto/produto'
+import Usuario from './Usuario/usuario'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/pessoa" element={<Pessoa />} />
         <Route path="/produto" element={<Produto />} />
         <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/usuario" element={<Usuario />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
